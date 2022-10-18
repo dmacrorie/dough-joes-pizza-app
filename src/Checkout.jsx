@@ -6,32 +6,34 @@
 //set up props - chengeOrders
 //form validation 
 //set up props - chengeBasket
- 
 import { Button, Container, Form } from 'react-bootstrap';
 import './Checkout.css';
+import { Link } from 'react-router-dom';
 
-const Checkout = ({basket, changeBasket, changeOrders, orders}) => {
+const Checkout = () => {
     //form validation
     //onclick handler
     //function to create order - onlcick will use this function 
     //function to change/clear basket
 
 
-    return(
+    return (
         //order summary component - from basket
         //form
         //button
-        <Container>
-            <orderSummary>
+        <Link to={`/Checkout`}>
+            <Container>
+                <orderSummary>
 
-            </orderSummary>
-            <Form>
+                </orderSummary>
+                <Form>
 
-            </Form>
-            <Button>
-                Complete Order
-            </Button>
-        </Container>
+                </Form>
+                <Button>
+                    Complete Order
+                </Button>
+            </Container>
+        </Link>
     );
 }
- export default Checkout;
+export default Checkout;
