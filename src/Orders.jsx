@@ -1,19 +1,22 @@
-// import Checkout from './Checkout'
+import { useNavigate } from "react-router-dom";
 
 const Orders = ({ orders }) => {
-  //function maps through the basket array.
-  //order details to show - time and date
-  //function so order can be clicked on and full details seen (from original order) - Pizzas, address, date, price
-  //function so we can see each individual pizza's ingredients, price and nutritional value
+  const navigate = useNavigate();
+
+  const handleOrderClick = (order) => {
+    navigate(`/vieworder/${order.id}`)
+  }
 
   return (
     <>
       {[...orders].map((order) => (
         <>
-          <p>Order 1</p>
-          <p>key={order.id}</p>
-          <p>price={order.price}</p>
-          <button>View order</button>
+          <p>Order {order.id + 1}</p>
+          <p>Date: {order.date}</p>
+          <p>Price: £{order.price}</p>
+          <button onClick={() => handleOrderClick(order)}>View order</button>
+          <br />
+          <br />
         </>
       ))}
     </>
