@@ -1,31 +1,23 @@
-import { useState } from 'react';
-
 // import Checkout from './Checkout'
 
-const Orders = () => {
-    const initialOrder = [
-        {
-          id: 0,
-          title: 'First Post',
-          message: 'Yay! First post',
-          likes: 0,
-        }
-      ];
-    
-      const [orders, ViewOrder] = useState(initialOrder);
+const Orders = ({ orders }) => {
   //function maps through the basket array.
   //order details to show - time and date
   //function so order can be clicked on and full details seen (from original order) - Pizzas, address, date, price
   //function so we can see each individual pizza's ingredients, price and nutritional value
 
-
-
-
-return (
+  return (
     <>
-    {orders.map((props)}
+      {[...orders].map((order) => (
+        <>
+          <p>Order 1</p>
+          <p>key={order.id}</p>
+          <p>price={order.price}</p>
+          <button>View order</button>
+        </>
+      ))}
     </>
-);
+  );
 };
 
 export default Orders;
