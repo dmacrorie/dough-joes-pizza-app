@@ -1,4 +1,5 @@
-import { Button, Navbar } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Navbar } from 'react-bootstrap';
 import { Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 
@@ -7,10 +8,9 @@ const App = () => (
   <div>
     <Navbar>
       <Navbar.Brand> PIZZA </Navbar.Brand>
-      <Button>🍕</Button>
+      <p>🍕</p>
       <Link className='nav-link' to="/">Home</Link>
     </Navbar>
-
 
     <Routes>
     <Route path="/" 
