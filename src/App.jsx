@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from 'react-bootstrap';
 import { Routes, Route, Link } from 'react-router-dom';
 import './App.css'
-
+import Orders from './Orders';
 
 const App = () => (
   <div>
@@ -17,6 +17,10 @@ const App = () => (
       />
       
     </Routes>
+    <Orders 
+      key = {key}
+      order = {order}
+    />
   </div>
 )
 
