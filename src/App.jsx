@@ -10,29 +10,8 @@ import ViewOrder from "./ViewOrder";
 import ViewPizza from "./ViewPizza";
 
 const App = () => {
-  //update fakeorder format
-  const fakeOrder = [
-    {
-      id: 0,
-      date: "17/10/22",
-      topping: "pepperoni",
-      price: 10,
-      nutrition: "vitamin c",
-      address: "Sheffield",
-      pizza: "Pizza 1"
-    },
-    {
-      id: 1,
-      date: "18/10/22",
-      topping: "ham",
-      price: 11,
-      nutrition: "vitamin d",
-      address: "Birmingham",
-      pizza: "Pizza 1"
-    },
-  ];
 
-  const [orders] = useState(fakeOrder);
+  const [orders] = useState([]);
   return (
     <Container>
       <Navbar bg="light" expand="md">
@@ -62,8 +41,6 @@ const App = () => {
           path="/vieworder/:orderId/:pizzaId"
           element={<ViewPizza orders={orders} />}
         />
-
-
       </Routes>
     </Container>
   );

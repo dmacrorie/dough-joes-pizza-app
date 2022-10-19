@@ -1,5 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 
+import { Card } from "react-bootstrap";
+
+import "./ViewOrder.css";
+
 const ViewOrder = ({ orders }) => {
   const { orderId } = useParams();
   const results = orders.filter(
@@ -12,15 +16,25 @@ const ViewOrder = ({ orders }) => {
   const order = results[0];
 
   return (
-    <>
-      <h3>Order {order.id + 1}</h3>
-      <p>Date: {order.date}</p>
-      <p>Price: £{order.price}</p>
-      <p>Address: {order.address}</p>
-      <p>Topping: {order.topping}</p>
-      <p>Nutrition: {order.nutrition}</p>
-      <Link to="/vieworder/:orderId/:pizzaId">{order.pizza}</Link>
-    </>
+    <Card className="viewCard" key={order.id}>
+      <Card.Header className="boldText">Order {order.id + 1}</Card.Header>
+      <Card.Body>
+        <Card.Text>Date: {order.time}</Card.Text>
+        <Card.Text>Pizzas: </Card.Text>
+        {order.basket.map((pizza) => (
+          <Link
+            className="nav-link"
+            key={pizza.id}
+            to={`/vieworder/${orderId}/${pizza.id}`}
+          >
+            <div className="pizzaLink">
+              <p>{`${pizza.baseType} Pizza`}</p>
+              <div className="pizzaBox"></div>
+            </div>
+          </Link>
+        ))}
+      </Card.Body>
+    </Card>
   );
 };
 
