@@ -7,7 +7,7 @@ import "./ViewOrder.css";
 const ViewOrder = ({ orders }) => {
   const { orderId } = useParams();
   const results = orders.filter(
-    (individualOrder) => individualOrder.id === Number(orderId)
+    (individualOrder) => individualOrder.id === orderId
   );
 
   if (!results || results.length === 0) {

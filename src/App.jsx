@@ -4,15 +4,16 @@ import { Routes, Route, Link } from 'react-router-dom';
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import './App.css';
 import CreatePizza from './CreatePizza';
+import Checkout from './Checkout.jsx'
 import Orders from "./Orders";
 import ViewOrder from "./ViewOrder";
 import ViewPizza from "./ViewPizza";
 import Basket from './Basket';
 
 const App = () => {
-
-  const [orders] = useState([]);
+  const [orders, changeOrders] = useState(JSON.parse(localStorage.getItem("orders")) || []);
   const [basket, changeBasket] = useState(
     JSON.parse(localStorage.getItem("basket")) || []
   );
@@ -21,7 +22,7 @@ const App = () => {
     <Container>
       <Navbar bg="light" expand="md">
         <Navbar.Brand> PIZZA </Navbar.Brand>
-        <p>🍕</p>
+        <div>🍕</div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -35,6 +36,7 @@ const App = () => {
             <Link className="nav-link" to="/basket">
               Basket
             </Link>
+            <Link className='nav-link' to="/Checkout">Checkout</Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -62,6 +64,10 @@ const App = () => {
           <Basket
             basket={basket}
           />
+        }
+        />
+        <Route path="/Checkout" element={
+          <Checkout basket={basket} changeBasket={changeBasket} orders={orders} changeOrders={changeOrders} />
         }
         />
       </Routes>

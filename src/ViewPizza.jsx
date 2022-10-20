@@ -6,7 +6,7 @@ import "./ViewPizza.css";
 
 const ViewPizza = ({ orders }) => {
   const { pizzaId, orderId } = useParams();
-  const orderResults = orders.filter((order) => order.id === Number(orderId));
+  const orderResults = orders.filter((order) => order.id === orderId);
 
   if (!orderResults || orderResults.length === 0) {
     return <p>no orders available</p>;
@@ -14,7 +14,7 @@ const ViewPizza = ({ orders }) => {
   const order = orderResults[0];
 
   const pizzaResults = order.basket.filter(
-    (pizza) => pizza.id === Number(pizzaId)
+    (pizza) => pizza.id === pizzaId
   );
 
   if (!pizzaResults || pizzaResults.length === 0) {

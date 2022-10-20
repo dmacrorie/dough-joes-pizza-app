@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
+import { v4 as uuidv4 } from 'uuid';
 
 import ToppingsList from "./ToppingsList";
 import CreatePizzaSummary from "./CreatePizzaSummary";
@@ -75,7 +76,7 @@ const CreatePizza = ({ basket, changeBasket }) => {
 
   const addToBasket = (event, formValues) => {
     event.preventDefault();
-    changeBasket([...basket, formValues]);
+    changeBasket([...basket, {...formValues, id: uuidv4()}]);
     localStorage.setItem("basket", JSON.stringify([...basket, formValues]));
     changeFormValues(defaultPizza);
     toastr["success"]("Pizza Added to Basket!");
