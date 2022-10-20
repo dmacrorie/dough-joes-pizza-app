@@ -7,8 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 import ToppingsList from "./ToppingsList";
 import CreatePizzaSummary from "./CreatePizzaSummary";
+import { useNavigate } from "react-router-dom";
 
-const CreatePizza = ({ basket, changeBasket }) => {
+const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) => {
   const listOfToppings = {
     tomato: {
       id: "Tomato",
@@ -38,7 +39,7 @@ const CreatePizza = ({ basket, changeBasket }) => {
     toppings: listOfToppings,
   };
 
-  const [formValues, changeFormValues] = useState(defaultPizza);
+  const [formValues, changeFormValues] = useState(((pizzaToEdit) ? pizzaToEdit : defaultPizza));
 
   const increaseTopping = (id) => {
     const toppingsFormValues = { ...formValues.toppings };
@@ -74,12 +75,35 @@ const CreatePizza = ({ basket, changeBasket }) => {
     changeFormValues(newBaseType);
   };
 
+  const navigate = useNavigate();
+
   const addToBasket = (event, formValues) => {
     event.preventDefault();
-    changeBasket([...basket, {...formValues, id: uuidv4()}]);
-    localStorage.setItem("basket", JSON.stringify([...basket, formValues]));
-    changeFormValues(defaultPizza);
-    toastr["success"]("Pizza Added to Basket!");
+    if (pizzaToEdit) {
+      const updatedBasket = basket.map((pizza) => {
+        if (pizza.id === pizzaToEdit.id) {
+          const target = pizza
+          const source = formValues
+          const updatedPizza = Object.assign(target, source)
+          return updatedPizza
+        } else {
+          return pizza
+        }
+      })
+      changeBasket(updatedBasket)
+      localStorage.setItem("basket", JSON.stringify(updatedBasket));
+
+      changePizzaToEdit()
+      changeFormValues(defaultPizza);
+      toastr["success"]("Pizza Updated!");
+      navigate(`/basket`);
+    } else {
+      changeBasket([...basket, {...formValues, id: uuidv4()}]);
+      localStorage.setItem("basket", JSON.stringify([...basket, formValues]));
+      changeFormValues(defaultPizza);
+      toastr["success"]("Pizza Added to Basket!");
+      navigate(`/`);
+    }
   };
 
   return (
@@ -109,11 +133,12 @@ const CreatePizza = ({ basket, changeBasket }) => {
         <CreatePizzaSummary
           pizza={formValues}
         />
+        
         <Button
           type="submit"
           onClick={(event) => addToBasket(event, formValues)}
         >
-          Add Pizza
+          {pizzaToEdit ? "Update Pizza" : "Add Pizza"}
         </Button>
       </Form>
     </Container>

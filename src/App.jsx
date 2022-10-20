@@ -17,6 +17,7 @@ const App = () => {
   const [basket, changeBasket] = useState(
     JSON.parse(localStorage.getItem("basket")) || []
   );
+  const [pizzaToEdit, changePizzaToEdit] = useState();
 
   return (
     <Container>
@@ -57,12 +58,16 @@ const App = () => {
             <CreatePizza
               basket={basket}
               changeBasket={changeBasket}
+              pizzaToEdit={pizzaToEdit}
+              changePizzaToEdit={changePizzaToEdit}
             />
           }
         />
         <Route path="/basket" element={
           <Basket
             basket={basket}
+            changeBasket={changeBasket}
+            changePizzaToEdit={changePizzaToEdit}
           />
         }
         />
