@@ -42,9 +42,9 @@ const App = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
+      
       <Routes>
-        <Route path="/" />
+        <Route path="/"/>
         <Route path="/orders" element={<Orders orders={orders} />} />
         <Route
           path="/vieworder/:orderId"

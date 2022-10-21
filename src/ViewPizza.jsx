@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import "./ViewPizza.css";
 import { listOfBaseTypes } from "./basesAndToppingsConfig";
 import AxiosNutrition from "./AxiosNutrition";
+import PizzaViewerComponent from "./PizzaViewerComponent";
 
 const ViewPizza = ({ orders }) => {
   const { pizzaId, orderId } = useParams();
@@ -29,6 +30,8 @@ const ViewPizza = ({ orders }) => {
     <Card className="pizzaCard">
       <Card.Header className="boldText">Pizza {pizza.id}</Card.Header>
       <Card.Body>
+        <div className="pizzaCardViewerBody">
+          <div>
         <Card.Text>
           <span className="boldText">Base:</span> {`${listOfBaseTypes[pizza.baseType].id}`}
         </Card.Text>
@@ -44,6 +47,9 @@ const ViewPizza = ({ orders }) => {
               </p>
             ))}
         </Card.Text>
+            </div>
+            <PizzaViewerComponent pizza={pizza} />
+            </div>
         <AxiosNutrition pizza={pizza} />
       </Card.Body>
     </Card>

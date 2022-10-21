@@ -1,8 +1,14 @@
-.pizzaCard{
-    width: 18rem;
-    margin-top: 15px;
+.pizzaCard {
+  width: fit-content;
+  margin-top: 15px;
 }
 
 .boldText {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+.pizzaCardViewerBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
