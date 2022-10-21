@@ -116,7 +116,7 @@ const CreatePizza = ({
     <Container>
       <Form>
         <Form.Group>
-          <Form.Label>Pizza Base</Form.Label>
+          <Form.Label className = "whiteText">Pizza Base</Form.Label>
           <Form.Select
             name="baseType"
             value={formValues.baseType}
@@ -137,7 +137,7 @@ const CreatePizza = ({
           </Form.Select>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Pizza Toppings</Form.Label>
+          <Form.Label className = "whiteText">Pizza Toppings</Form.Label>
           <ToppingsList
             toppings={formValues.toppings}
             decreaseTopping={decreaseTopping}

@@ -6,6 +6,8 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import './App.css';
+import './ToppingsList.css';
+import logo from "./img/dojopza.png"
 import CreatePizza from './CreatePizza';
 import Checkout from './Checkout.jsx'
 import Orders from "./Orders";
@@ -22,9 +24,8 @@ const App = () => {
 
   return (
     <Container>
-      <Navbar bg="light" expand="md">
-        <Navbar.Brand> PIZZA </Navbar.Brand>
-        <div>🍕</div>
+      <Navbar className="navbarDiv" bg="dark" variant="dark" expand="md">
+          <img src={logo} alt="logo" className="logo"/>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">

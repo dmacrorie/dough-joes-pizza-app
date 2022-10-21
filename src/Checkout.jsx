@@ -92,7 +92,7 @@ const Checkout = ({ basket, changeBasket, orders, changeOrders }) => {
       <Form noValidate validated={validated} onSubmit={(event) => submitHandler(event)}>
 
         <Form.Group controlId="UserName">
-          <Form.Label>Name</Form.Label>
+          <Form.Label className = "whiteText">Name</Form.Label>
           <Form.Control
             name="name"
             type="text"
@@ -104,7 +104,7 @@ const Checkout = ({ basket, changeBasket, orders, changeOrders }) => {
         </Form.Group>
 
         <Form.Group controlId="AddressLineOne">
-          <Form.Label>Address Line One</Form.Label>
+          <Form.Label className = "whiteText">Address Line One</Form.Label>
           <Form.Control
             name="addressLineOne"
             type="text"
@@ -116,7 +116,7 @@ const Checkout = ({ basket, changeBasket, orders, changeOrders }) => {
         </Form.Group>
 
         <Form.Group controlId="City">
-          <Form.Label>City</Form.Label>
+          <Form.Label className = "whiteText">City</Form.Label>
           <Form.Control
             name="city"
             type="text"
@@ -128,7 +128,7 @@ const Checkout = ({ basket, changeBasket, orders, changeOrders }) => {
         </Form.Group>
 
         <Form.Group controlId="PostCode">
-          <Form.Label>PostCode</Form.Label>
+          <Form.Label className = "whiteText">PostCode</Form.Label>
           <Form.Control
             name="postCode"
             type="text"

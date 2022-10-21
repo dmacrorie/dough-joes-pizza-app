@@ -2,20 +2,25 @@ import { Card, Button } from "react-bootstrap";
 
 const ToppingsList = ({ toppings, increaseTopping, decreaseTopping }) => {
   return Object.keys(toppings).map((toppingKey) => (
-    <Card key={toppingKey}>
-      <Card.Body>
+    <Card className="toppingCard" key={toppingKey}>
+      <Card.Body className="toppingCardBody">
         <Card.Title>{toppings[toppingKey].id} ({toppings[toppingKey].pencePerServing}p)</Card.Title>
-        <Button
-          onClick={() => decreaseTopping(toppings[toppingKey].id)}
-        >
-          Less
-        </Button>
-        <Card.Text>{toppings[toppingKey].amount}</Card.Text>
-        <Button
-          onClick={() => increaseTopping(toppings[toppingKey].id)}
-        >
-          More
-        </Button>
+        <Card.Text className="toppingCardText">
+          <Button
+            variant="flat"
+            onClick={() => decreaseTopping(toppings[toppingKey].id)}
+          >
+            <span className="toppingAmount">-</span>
+          </Button>
+          <Card.Text><span className="toppingAmount">{toppings[toppingKey].amount}</span></Card.Text>
+          <Button
+            variant="flat"
+            onClick={() => increaseTopping(toppings[toppingKey].id)}
+          >
+            <span className="toppingAmount">+</span>
+        
+          </Button>
+        </Card.Text>
       </Card.Body>
     </Card>
   ));
