@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
 import "./ViewOrder.css";
+import { listOfBaseTypes } from "./basesAndToppingsConfig";
 
 const ViewOrder = ({ orders }) => {
   const { orderId } = useParams();
@@ -28,7 +29,7 @@ const ViewOrder = ({ orders }) => {
             to={`/vieworder/${orderId}/${pizza.id}`}
           >
             <div className="pizzaLink">
-              <p>{`${pizza.baseType} Pizza`}</p>
+              <p>{`${listOfBaseTypes[pizza.baseType].id} Pizza`}</p>
               <div className="pizzaBox"></div>
             </div>
           </Link>

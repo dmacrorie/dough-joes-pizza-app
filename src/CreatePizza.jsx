@@ -3,40 +3,19 @@ import { useState } from "react";
 import { Form, Container, Button } from "react-bootstrap";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import ToppingsList from "./ToppingsList";
 import CreatePizzaSummary from "./CreatePizzaSummary";
 import { useNavigate } from "react-router-dom";
+import { listOfBaseTypes, listOfToppings } from "./basesAndToppingsConfig";
 
 const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) => {
-  const listOfToppings = {
-    tomato: {
-      id: "Tomato",
-      amount: 0,
-    },
-    ham: {
-      id: "Ham",
-      amount: 0,
-    },
-    pineapple: {
-      id: "Pineapple",
-      amount: 0,
-    },
-    cheese: {
-      id: "Cheese",
-      amount: 0,
-    },
-    mushroom: {
-      id: "Mushroom",
-      amount: 0,
-    },
-  };
 
   const defaultPizza = {
     id: "",
-    baseType: "Regular",
-    toppings: listOfToppings,
+    baseType: "regular",
+    toppings: { ...listOfToppings },
   };
 
   const [formValues, changeFormValues] = useState(((pizzaToEdit) ? pizzaToEdit : defaultPizza));
@@ -48,11 +27,18 @@ const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) =
         id === toppingsFormValues[key].id &&
         toppingsFormValues[key].amount < 2
       ) {
-        toppingsFormValues[key].amount =
-          toppingsFormValues[key].amount + 1;
+        changeFormValues({
+          ...formValues,
+          toppings: {
+            ...toppingsFormValues,
+            [key]: {
+              ...toppingsFormValues[key],
+              amount: toppingsFormValues[key].amount + 1,
+            },
+          },
+        });
       }
     });
-    changeFormValues({ ...formValues, toppings: toppingsFormValues });
   };
 
   const decreaseTopping = (id) => {
@@ -62,11 +48,18 @@ const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) =
         id === toppingsFormValues[key].id &&
         toppingsFormValues[key].amount > 0
       ) {
-        toppingsFormValues[key].amount =
-          toppingsFormValues[key].amount - 1;
+        changeFormValues({
+          ...formValues,
+          toppings: {
+            ...toppingsFormValues,
+            [key]: {
+              ...toppingsFormValues[key],
+              amount: toppingsFormValues[key].amount - 1,
+            },
+          },
+        });
       }
     });
-    changeFormValues({ ...formValues, toppings: toppingsFormValues });
   };
 
   const handleBaseTypeChange = (event) => {
@@ -94,16 +87,23 @@ const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) =
       localStorage.setItem("basket", JSON.stringify(updatedBasket));
 
       changePizzaToEdit()
-      changeFormValues(defaultPizza);
+      changeFormValues({...defaultPizza});
       toastr["success"]("Pizza Updated!");
       navigate(`/basket`);
     } else {
       changeBasket([...basket, {...formValues, id: uuidv4()}]);
       localStorage.setItem("basket", JSON.stringify([...basket, formValues]));
-      changeFormValues(defaultPizza);
+      changeFormValues({ ...defaultPizza});
       toastr["success"]("Pizza Added to Basket!");
       navigate(`/`);
     }
+  };
+
+  const calculateBaseCost = (base) => {
+    const basePence = listOfBaseTypes[base].pencePerServing;
+    const basePrice = basePence / 100;
+
+    return basePrice;
   };
 
   return (
@@ -116,10 +116,18 @@ const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) =
             value={formValues.baseType}
             onChange={(event) => handleBaseTypeChange(event)}
           >
-            <option value="Regular">Regular</option>
-            <option value="Thin Crust">Thin Crust</option>
-            <option value="Deep Pan">Deep Pan</option>
-            <option value="Stuffed Crust">Stuffed Crust</option>
+            <option value="regular">
+              Regular (£{calculateBaseCost("regular").toFixed(2)})
+            </option>
+            <option value="thincrust">
+              Thin Crust (£{calculateBaseCost("thincrust").toFixed(2)})
+            </option>
+            <option value="deeppan">
+              Deep Pan (£{calculateBaseCost("deeppan").toFixed(2)})
+            </option>
+            <option value="stuffedcrust">
+              Stuffed Crust (£{calculateBaseCost("stuffedcrust").toFixed(2)})
+            </option>
           </Form.Select>
         </Form.Group>
         <Form.Group>
@@ -130,10 +138,7 @@ const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) =
             increaseTopping={increaseTopping}
           />
         </Form.Group>
-        <CreatePizzaSummary
-          pizza={formValues}
-        />
-        
+        <CreatePizzaSummary pizza={formValues} />
         <Button
           type="submit"
           onClick={(event) => addToBasket(event, formValues)}

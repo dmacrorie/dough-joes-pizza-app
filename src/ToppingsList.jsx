@@ -4,7 +4,7 @@ const ToppingsList = ({ toppings, increaseTopping, decreaseTopping }) => {
   return Object.keys(toppings).map((toppingKey) => (
     <Card key={toppingKey}>
       <Card.Body>
-        <Card.Title>{toppings[toppingKey].id}</Card.Title>
+        <Card.Title>{toppings[toppingKey].id} ({toppings[toppingKey].pencePerServing}p)</Card.Title>
         <Button
           onClick={() => decreaseTopping(toppings[toppingKey].id)}
         >

@@ -1,8 +1,8 @@
 // Example test file (see exampleNumber.js)
-import { checkoutNameValidation } from './src/checkoutFormValidation'
-import { checkoutCityValidation } from './src/checkoutFormValidation'
-import { checkoutAddressLineOneValidation } from './src/checkoutFormValidation'
-import { checkoutPostCodeValidation } from './src/checkoutFormValidation'
+import { checkoutNameValidation } from './checkoutFormValidation'
+import { checkoutCityValidation } from './checkoutFormValidation'
+import { checkoutAddressLineOneValidation } from './checkoutFormValidation'
+import { checkoutPostCodeValidation } from './checkoutFormValidation'
 
 
 describe('checkoutNameValidation', () => {

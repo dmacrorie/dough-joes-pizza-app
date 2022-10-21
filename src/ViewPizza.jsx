@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
 import "./ViewPizza.css";
+import { listOfBaseTypes } from "./basesAndToppingsConfig";
 
 const ViewPizza = ({ orders }) => {
   const { pizzaId, orderId } = useParams();
@@ -30,7 +31,7 @@ const ViewPizza = ({ orders }) => {
       <Card.Header className="boldText">Pizza {pizza.id}</Card.Header>
       <Card.Body>
         <Card.Text>
-          <span className="boldText">Base:</span> {`${pizza.baseType}`}
+          <span className="boldText">Base:</span> {`${listOfBaseTypes[pizza.baseType].id}`}
         </Card.Text>
         <Card.Text>
           <Card.Text>
