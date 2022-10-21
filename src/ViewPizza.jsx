@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 
 import "./ViewPizza.css";
 import { listOfBaseTypes } from "./basesAndToppingsConfig";
+import AxiosNutrition from "./AxiosNutrition";
 
 const ViewPizza = ({ orders }) => {
   const { pizzaId, orderId } = useParams();
@@ -14,9 +15,7 @@ const ViewPizza = ({ orders }) => {
   }
   const order = orderResults[0];
 
-  const pizzaResults = order.basket.filter(
-    (pizza) => pizza.id === pizzaId
-  );
+  const pizzaResults = order.basket.filter((pizza) => pizza.id === pizzaId);
 
   if (!pizzaResults || pizzaResults.length === 0) {
     return <p>no pizzas available</p>;
@@ -45,6 +44,7 @@ const ViewPizza = ({ orders }) => {
               </p>
             ))}
         </Card.Text>
+        <AxiosNutrition pizza={pizza} />
       </Card.Body>
     </Card>
   );

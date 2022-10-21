@@ -1,4 +1,3 @@
-// Example test file (see exampleNumber.js)
 import { checkoutNameValidation } from './checkoutFormValidation'
 import { checkoutCityValidation } from './checkoutFormValidation'
 import { checkoutAddressLineOneValidation } from './checkoutFormValidation'

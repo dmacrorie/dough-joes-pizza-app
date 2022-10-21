@@ -7,8 +7,7 @@
   height: 50px;
   background-image: url("./img/pizzaPic.png");
   background-size: 100px;
-  text-align: center;
-  padding-top: 8px;
+  
 }
 .pizzaBox:hover {
   opacity: 0.8;
@@ -16,7 +15,6 @@
 .pizzaLink {
   display: flex;
   justify-content: space-between;
-  max-width: 80%;
   margin-bottom: 10px;
 }
 .boldText {
@@ -25,4 +23,7 @@
 .viewCard {
   width: 18rem;
   margin-top: 15px;
+}
+.pizzaBase{
+  width: 140px;
 }

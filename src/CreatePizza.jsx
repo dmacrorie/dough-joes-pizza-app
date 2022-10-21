@@ -10,15 +10,21 @@ import CreatePizzaSummary from "./CreatePizzaSummary";
 import { useNavigate } from "react-router-dom";
 import { listOfBaseTypes, listOfToppings } from "./basesAndToppingsConfig";
 
-const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) => {
-
+const CreatePizza = ({
+  basket,
+  changeBasket,
+  pizzaToEdit,
+  changePizzaToEdit,
+}) => {
   const defaultPizza = {
     id: "",
     baseType: "regular",
     toppings: { ...listOfToppings },
   };
 
-  const [formValues, changeFormValues] = useState(((pizzaToEdit) ? pizzaToEdit : defaultPizza));
+  const [formValues, changeFormValues] = useState(
+    pizzaToEdit ? pizzaToEdit : defaultPizza
+  );
 
   const increaseTopping = (id) => {
     const toppingsFormValues = { ...formValues.toppings };
@@ -75,25 +81,25 @@ const CreatePizza = ({ basket, changeBasket, pizzaToEdit, changePizzaToEdit }) =
     if (pizzaToEdit) {
       const updatedBasket = basket.map((pizza) => {
         if (pizza.id === pizzaToEdit.id) {
-          const target = pizza
-          const source = formValues
-          const updatedPizza = Object.assign(target, source)
-          return updatedPizza
+          const target = pizza;
+          const source = formValues;
+          const updatedPizza = Object.assign(target, source);
+          return updatedPizza;
         } else {
-          return pizza
+          return pizza;
         }
-      })
-      changeBasket(updatedBasket)
+      });
+      changeBasket(updatedBasket);
       localStorage.setItem("basket", JSON.stringify(updatedBasket));
 
-      changePizzaToEdit()
-      changeFormValues({...defaultPizza});
+      changePizzaToEdit();
+      changeFormValues({ ...defaultPizza });
       toastr["success"]("Pizza Updated!");
       navigate(`/basket`);
     } else {
-      changeBasket([...basket, {...formValues, id: uuidv4()}]);
+      changeBasket([...basket, { ...formValues, id: uuidv4() }]);
       localStorage.setItem("basket", JSON.stringify([...basket, formValues]));
-      changeFormValues({ ...defaultPizza});
+      changeFormValues({ ...defaultPizza });
       toastr["success"]("Pizza Added to Basket!");
       navigate(`/`);
     }
